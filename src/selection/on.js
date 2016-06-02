@@ -13,7 +13,7 @@ function filterContextListener(listener, index, group) {
   listener = contextListener(listener, index, group);
   return function(event) {
     var related = event.relatedTarget;
-    if (!related || (related !== this && !(related.compareDocumentPosition(this) & 8))) {
+    if (!related || !related.compareDocumentPosition || (related !== this && !(related.compareDocumentPosition(this) & 8))) {
       listener.call(this, event);
     }
   };
